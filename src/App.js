@@ -1,38 +1,44 @@
+/* eslint-disable no-multi-str */
 // import logo from './logo.svg';
+import React, { useReducer } from 'react';
 import './App.css';
-import Template from './components/Template';
-import OutPut from './components/OutPut';
-import TabelList from './components/TabelList';
-import KeyCustomize from './components/KeyCustomize';
+import './Components/components.css';
+import Template, {TemplateReducer, TemplateData} from './Components/Template.js';
+import OutPut, {OutPutReducer, OutPutData} from './Components/OutPut.js';
+import TabelList, {TableListReducer, TableListData} from './Components/TabelList.js';
+import KeyCustomize, {KeyCustomizeReducer, KeyCustomizeData} from './Components/KeyCustomize.js';
 
+const initialState = {
+  template: TemplateData,
+  outPut: OutPutData,
+  tableList: TableListData,
+  keyCustomize: KeyCustomizeData,
+};
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
+const reducers = {
+  template: TemplateReducer,
+  outPut: OutPutReducer,
+  tableList: TableListReducer,
+  keyCustomize: KeyCustomizeReducer,
+}
+
+function reducer(state, action) {
+    const newState = {...state};
+    Object.keys(reducers).forEach(key =>{
+        const childState = state[key];
+        newState[key] = reducers[key](childState,action);
+    });
+    return newState;
+}
+
 function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <div>
-      <Template/>
-      <KeyCustomize/>
-      <TabelList/>
-      <OutPut/>
+      <Template data={state.template} dispatch={dispatch}/>
+      <KeyCustomize data={state.keyCustomize} dispatch={dispatch}/>
+      <TabelList data={state.tableList} dispatch={dispatch}/>
+      <OutPut data={state.outPut} dispatch={dispatch}/>
     </div>
   )
 }

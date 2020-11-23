@@ -1,10 +1,12 @@
 /* eslint-disable no-multi-str */
+import React, { useState } from "react";
 
 function Template(props) {
     let items = props.data.items
     let curIndex = props.data.curIndex
-    let message = props.data.message
     let dispatch = props.dispatch
+    let [count, setCount] = useState(props.tableList.length) 
+
     return (
       <div className='Template Part'>
           <h2>模板</h2>
@@ -18,8 +20,14 @@ function Template(props) {
                   return (<option value={i} key={i}>{v.name}</option>)
                 })}
             </select>
-            <button>插入配置</button>
-            <label style={{color: "red", marginLeft: "20px"}}>{message}</label>
+            <button onClick={()=>{
+              dispatch({
+                type: "TableList-Add",
+                name: "table" + count,
+                value: items[curIndex].value
+              })
+              setCount(count+1)
+            }}>插入模板</button>
           </div>
 
           <div>
@@ -45,6 +53,7 @@ let TemplateData = {
   items: [
     {
       name: "key-value",
+      value: 1,
       dec: "Key：value类型配置\n\
       属性\t\t类型\t\t值\t\t描述\n\
       test\t\tnumber\t\t1\t\t这是描述\n\
@@ -54,6 +63,7 @@ let TemplateData = {
     },
     {
       name: "array",
+      value: 2,
       dec: "数组类型配置\n\
       顺序\t\t数值1\t\t数值1\t\t数值3\n\
       index\t\tvalue1\t\tvalue2\t\tvalue3\n\
@@ -64,8 +74,7 @@ let TemplateData = {
       "
     }
   ],
-  curIndex: 1,
-  message: 123,
+  curIndex: 1
 }
 
 export {TemplateReducer, TemplateData}

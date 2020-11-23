@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 function KeyCustomizeItem(props) {
   let [count, setCount] = useState(props.data.items.length);
   let baseType = props.baseType;
@@ -103,7 +104,7 @@ function KeyCustomizeItem(props) {
         })}
       </div>
       {!props.data.isLock && (
-        <div style={{marginLeft: "380px", marginTop: "-20px"}}>
+        <div style={{marginLeft: "430px", marginTop: "-20px"}}>
           <button
             className="CubeButton"
             onClick={() => {
@@ -186,7 +187,7 @@ function KeyCustomize(props) {
 export default KeyCustomize;
 
 function KeyCustomizeReducer(state, action) {
-  let newState = JSON.parse(JSON.stringify(state));
+  let newState = state;
   let checkName = () => {
     newState.customizeType.forEach((item, i) => {
       item.isRepeat = !newState.customizeType.every((v, ii) => {
@@ -264,7 +265,7 @@ let KeyCustomizeData = {
         ["count", 0, true],
       ],
       isRepeat: false,
-      isLock: true,
+      isLock: false,
     },
   ],
 };

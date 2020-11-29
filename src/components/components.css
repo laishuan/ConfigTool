@@ -74,6 +74,10 @@ button {
   margin: 3px;
 }
 
+.CubeAddSub {
+  float: right;
+}
+
 .CubeItem > select {
   width: 60px;
 }

@@ -53,21 +53,27 @@ let TemplateData = {
   items: [
     {
       name: "key-value",
-      value: 1,
+      value: [["key1",['number'], 1], ["key2",['string'], "aaa"]],
       dec: "Key：value类型配置\n\
-      属性\t\t类型\t\t值\t\t描述\n\
-      test\t\tnumber\t\t1\t\t这是描述\n\
-      test2\t\tstring\t\t2\t\t这是描述2\n\
+      属性\t\t类型\t\t值\t\t\n\
+      key1\t\tnumber\t\t1\t\t\n\
+      key2\t\tstring\t\taaa\t\t\
       ...\n\
       "
     },
     {
       name: "array",
-      value: 2,
+      value: [
+        ["顺序", "数值1", "数值2", "数值3"],
+        [["number"], ["number"], ["string"], ["string"]],
+        ["index", "value1", "value2", "value3"],
+        [1, 2, "aaa", "bbb"],
+        [2, 3, "aaa", "bbb"]
+      ],
       dec: "数组类型配置\n\
-      顺序\t\t数值1\t\t数值1\t\t数值3\n\
-      index\t\tvalue1\t\tvalue2\t\tvalue3\n\
+      顺序\t\t数值1\t\t数值2\t\t数值3\n\
       number\t\tnumber\t\tstring\t\tstring\n\
+      index\t\tvalue1\t\tvalue2\t\tvalue3\n\
       1    \t\t2    \t\taaa  \t\tbbb\n\
       2    \t\t3    \t\taaa  \t\tbbb\n\
       ...\n\

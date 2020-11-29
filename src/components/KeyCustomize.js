@@ -7,6 +7,7 @@ function KeyCustomizeItem(props) {
   let index = props.index;
   return (
     <div className="CustomizeItem">
+
       <div>
         <label style={{ color: props.data.isRepeat ? "red" : "black" }}>
           {"类型名: "}
@@ -53,6 +54,36 @@ function KeyCustomizeItem(props) {
           </a>
         )}
       </div>
+
+      {!props.data.isLock && (
+        <div className="CubeAddSub" >
+          <button
+            className="CubeButton"
+            onClick={() => {
+              dispatch({
+                type: "KeyCustomize-add-key",
+                itemIndex: index,
+                name: "key" + count,
+              });
+              setCount(count + 1);
+            }}>
+            +
+          </button>
+          {props.data.items.length > 1 && (
+            <button
+              className="CubeButton"
+              onClick={() => {
+                dispatch({
+                  type: "KeyCustomize-delete-key",
+                  itemIndex: index,
+                });
+                setCount(count + 1);
+              }}>
+              -
+            </button>
+          )}
+        </div>
+      )}
 
       <div className="CubeContainer">
         {props.data.items.map((v, i) => {
@@ -103,35 +134,6 @@ function KeyCustomizeItem(props) {
           );
         })}
       </div>
-      {!props.data.isLock && (
-        <div style={{marginLeft: "430px", marginTop: "-20px"}}>
-          <button
-            className="CubeButton"
-            onClick={() => {
-              dispatch({
-                type: "KeyCustomize-add-key",
-                itemIndex: index,
-                name: "key" + count,
-              });
-              setCount(count + 1);
-            }}>
-            +
-          </button>
-          {props.data.items.length > 1 && (
-            <button
-              className="CubeButton"
-              onClick={() => {
-                dispatch({
-                  type: "KeyCustomize-delete-key",
-                  itemIndex: index,
-                });
-                setCount(count + 1);
-              }}>
-              -
-            </button>
-          )}
-        </div>
-      )}
     </div>
   );
 }
